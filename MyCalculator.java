@@ -65,18 +65,46 @@ public class MyCalculator {
         || operator.equals("*") || operator.toLowerCase().equals("sin")
         || operator.toLowerCase().equals("cos") || operator.toLowerCase().equals("tan");
     }
+
+    public static int promptUserForNumOfOperands(Scanner scanner, String operator) {
+        int numOfOperands = 0;
+
+        while(true) {
+            System.out.println(
+                "How many numbers do you wish to perform this operation on?"
+                );
+            numOfOperands = scanner.nextInt();
+            if (validateNumOfOperands(numOfOperands, operator)) {
+                break;
+            }
+            System.out.println("Please enter a valid number of operands.");
+        }
+        return numOfOperands;
+    }
+
+    public static boolean validateNumOfOperands(int numOfOperands, String operator) {
+        if (operator.toLowerCase().equals("sin") || operator.toLowerCase().equals("cos") || operator.toLowerCase().equals("tan")) {
+            return numOfOperands == 1;
+        }
+        else {
+            return numOfOperands > 1;
+        }
+    }
     
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         
         final String calculatorType = promptUserForCalculatorType(userInput);
         final String operator;
+        final int numOfOperands;
 
         if (calculatorType.equals("standard")) {
             operator = promptUserForStandardOperator(userInput);
+            numOfOperands = promptUserForNumOfOperands(userInput, operator);
         }
         else if (calculatorType.equals("scientific")) {
             operator = promptUserForScientificOperator(userInput);
+            numOfOperands = promptUserForNumOfOperands(userInput, operator);
         }
         userInput.close();
     }
