@@ -39,7 +39,7 @@ public class MyCalculator {
 
     public static boolean validateStandardOperator(String operator) {
         return operator.equals("+") || operator.equals("-")
-        || operator.equals("/") || operator.equals("+");
+        || operator.equals("/") || operator.equals("*");
     }
 
     public static String promptUserForScientificOperator(Scanner scanner) {
@@ -151,25 +151,48 @@ public class MyCalculator {
             return 0.0;
         }
     }
+
+    public static boolean promptUserToDoAnotherOperation(Scanner scanner) {
+        String choice;
+
+        while(true) {
+            System.out.println("Do you want to start over? (Y/N)");
+            choice = scanner.nextLine().toLowerCase();
+            if (validateChoiceToDoAnotherOperation(choice)) {
+                break;
+            }
+            System.out.print("Invalid choice. ");
+        }
+        return choice.equals("y");
+    }
+
+    public static boolean validateChoiceToDoAnotherOperation(String choice) {
+        return choice.equals("y") || choice.equals("n");
+    }
+
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        
-        final String calculatorType = promptUserForCalculatorType(userInput);
-        final String operator;
-        final int numOfOperands;
-        final double operationResult;
+        boolean isCalculatorActive = true;
 
-        if (calculatorType.equals("standard")) {
-            operator = promptUserForStandardOperator(userInput);
-            numOfOperands = promptUserForNumOfOperands(userInput, operator);
-            operationResult = performStandardOperation(userInput, numOfOperands, operator);
-            System.out.println(operationResult);
-        }
-        else if (calculatorType.equals("scientific")) {
-            operator = promptUserForScientificOperator(userInput);
-            numOfOperands = promptUserForNumOfOperands(userInput, operator);
-            operationResult = performScientificOperation(userInput, numOfOperands, operator);
-            System.out.println(operationResult);
+        while(isCalculatorActive) {
+            final String calculatorType = promptUserForCalculatorType(userInput);
+            final String operator;
+            final int numOfOperands;
+            final double operationResult;
+
+            if (calculatorType.equals("standard")) {
+                operator = promptUserForStandardOperator(userInput);
+                numOfOperands = promptUserForNumOfOperands(userInput, operator);
+                operationResult = performStandardOperation(userInput, numOfOperands, operator);
+                System.out.println("Result: " + operationResult);
+            }
+            else if (calculatorType.equals("scientific")) {
+                operator = promptUserForScientificOperator(userInput);
+                numOfOperands = promptUserForNumOfOperands(userInput, operator);
+                operationResult = performScientificOperation(userInput, numOfOperands, operator);
+                System.out.println("Result: " + operationResult);
+            }
+            isCalculatorActive = promptUserToDoAnotherOperation(userInput);
         }
         userInput.close();
     }
