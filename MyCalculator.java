@@ -7,7 +7,7 @@ public class MyCalculator {
         
         while(true) {
             System.out.println("Enter the calculator mode: Standard/Scientific?");
-            calculatorType = scanner.nextLine().toLowerCase();
+            calculatorType = scanner.next().toLowerCase();
             if (validateCalculatorType(calculatorType)) {
                 break;
             }
@@ -28,7 +28,7 @@ public class MyCalculator {
                 "Enter '+' for addition, '-' for subtractions, "
                 + "'*' for multiplication, '/' for division:"
                 );
-            operator = scanner.nextLine(); // 
+            operator = scanner.next(); // 
             if (validateStandardOperator(operator)) {
                 break;
             }
@@ -51,7 +51,7 @@ public class MyCalculator {
                 + "'*' for multiplication, '/' for division, "
                 + "'sin' for sin x, 'cos' for cos x, 'tan' for tan x:"
                 );
-            operator = scanner.nextLine();
+            operator = scanner.next();
             if (validateScientificOperator(operator)) {
                 break;
             }
@@ -157,7 +157,7 @@ public class MyCalculator {
 
         while(true) {
             System.out.println("Do you want to start over? (Y/N)");
-            choice = scanner.nextLine().toLowerCase();
+            choice = scanner.next().toLowerCase();
             if (validateChoiceToDoAnotherOperation(choice)) {
                 break;
             }
