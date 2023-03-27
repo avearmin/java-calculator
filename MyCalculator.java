@@ -33,7 +33,7 @@ public class MyCalculator {
             if (validateStandardOperator(operator)) {
                 break;
             }
-            System.out.println("Invalid operator: " + operator);
+            System.out.println("Invalid operator " + operator);
         }
         return operator;
     }
@@ -209,6 +209,7 @@ public class MyCalculator {
             }
             isCalculatorActive = promptUserToDoAnotherOperation(userInput);
         }
+        System.out.println("Goodbye");
         userInput.close();
     }
 }
