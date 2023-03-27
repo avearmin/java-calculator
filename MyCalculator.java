@@ -71,9 +71,7 @@ public class MyCalculator {
         int numOfOperands = 0;
 
         while(true) {
-            System.out.println(
-                "How many numbers do you wish to perform this operation on?"
-                );
+            printStandardOperandPromptBasedOnOperator(operator);
             numOfOperands = scanner.nextInt();
             if (validateNumOfOperands(numOfOperands, operator)) {
                 break;
@@ -81,6 +79,22 @@ public class MyCalculator {
             System.out.println("Please enter a valid number of operands.");
         }
         return numOfOperands;
+    }
+
+    public static void printStandardOperandPromptBasedOnOperator(String operator) {
+        if (operator.equals("+")) {
+            System.out.println("How many numbers do you want to add?");
+        }
+        else if (operator.equals("-")) {
+            System.out.println("How many numbers do you want to subtract?");
+        }
+        else if (operator.equals("/")) {
+            System.out.println("How many numbers do you want to divide?");
+        }
+        else if (operator.equals("*")) {
+            System.out.println("How many numbers do you want to multiply?");
+        }
+
     }
 
     public static boolean validateNumOfOperands(int numOfOperands, String operator) {
@@ -94,7 +108,7 @@ public class MyCalculator {
 
     public static double performStandardOperation(Scanner scanner, int numOfOperands, String operator) {
         double result = 0; // if result is not given a value java will complain that 'local variable may not have been initialized.'
-        System.out.printf("Enter %d number:\n", numOfOperands);
+        System.out.printf("Enter %d numbers\n", numOfOperands);
         for (int i = 0; i < numOfOperands; i++) {
             double operand = scanner.nextDouble();
             if (i == 0) {
