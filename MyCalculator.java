@@ -62,9 +62,13 @@ public class MyCalculator {
     }
 
     public static boolean validateScientificOperator(String operator) {
-        return operator.equals("+") || operator.equals("-") || operator.equals("/") 
-        || operator.equals("*") || operator.toLowerCase().equals("sin")
-        || operator.toLowerCase().equals("cos") || operator.toLowerCase().equals("tan");
+        return validateStandardOperator(operator)|| validateTrigFunction(operator);
+    }
+
+    public static boolean validateTrigFunction(String operator) {
+        return operator.toLowerCase().equals("sin")
+        || operator.toLowerCase().equals("cos") 
+        || operator.toLowerCase().equals("tan");
     }
 
     public static int promptUserForNumOfOperands(Scanner scanner, String operator) {
@@ -97,7 +101,7 @@ public class MyCalculator {
     }
 
     public static boolean validateNumOfOperands(int numOfOperands, String operator) {
-        if (operator.toLowerCase().equals("sin") || operator.toLowerCase().equals("cos") || operator.toLowerCase().equals("tan")) {
+        if (validateTrigFunction(operator)) {
             return numOfOperands == 1;
         }
         else {
@@ -140,7 +144,7 @@ public class MyCalculator {
 
     public static double performScientificOperation(Scanner scanner, int numOfOperands, String operator) {
         double result = 0.0;
-        if (operator.toLowerCase().equals("sin") || operator.toLowerCase().equals("cos") || operator.toLowerCase().equals("tan")) {
+        if (validateTrigFunction(operator)) {
             printScientificOperandPromptBasedOnOperator(operator);
             double operand = scanner.nextDouble();
             result = getScientificOperationResult(operand, operator);
@@ -214,7 +218,12 @@ public class MyCalculator {
             }
             else if (calculatorType.equals("scientific")) {
                 operator = promptUserForScientificOperator(userInput);
-                numOfOperands = promptUserForNumOfOperands(userInput, operator);
+                if (validateTrigFunction(operator)) {
+                    numOfOperands = 1;
+                }
+                else {
+                    numOfOperands = promptUserForNumOfOperands(userInput, operator);
+                }
                 operationResult = performScientificOperation(userInput, numOfOperands, operator);
                 System.out.println("Result: " + operationResult);
             }
