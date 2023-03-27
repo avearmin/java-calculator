@@ -13,6 +13,7 @@ public class MyCalculator {
             }
             System.out.println("Please enter a valid calculator type.");
         }
+        System.out.printf("The calculator will operate in %s mode.\n", calculatorType);
         return calculatorType;
     }
 
@@ -26,7 +27,7 @@ public class MyCalculator {
         while(true) {
             System.out.println(
                 "Enter '+' for addition, '-' for subtractions, "
-                + "'*' for multiplication, '/' for division:"
+                + "'*' for multiplication, '/' for division"
                 );
             operator = scanner.next(); // 
             if (validateStandardOperator(operator)) {
