@@ -94,7 +94,6 @@ public class MyCalculator {
         else if (operator.equals("*")) {
             System.out.println("How many numbers do you want to multiply?");
         }
-
     }
 
     public static boolean validateNumOfOperands(int numOfOperands, String operator) {
@@ -142,7 +141,7 @@ public class MyCalculator {
     public static double performScientificOperation(Scanner scanner, int numOfOperands, String operator) {
         double result = 0.0;
         if (operator.toLowerCase().equals("sin") || operator.toLowerCase().equals("cos") || operator.toLowerCase().equals("tan")) {
-            System.out.printf("Enter %d number:\n", numOfOperands);
+            printScientificOperandPromptBasedOnOperator(operator);
             double operand = scanner.nextDouble();
             result = getScientificOperationResult(operand, operator);
         }
@@ -150,6 +149,18 @@ public class MyCalculator {
             result = performStandardOperation(scanner, numOfOperands, operator);
         }
         return result;
+    }
+
+    public static void printScientificOperandPromptBasedOnOperator(String operator) {
+        if (operator.toLowerCase().equals("sin")) {
+            System.out.println("Enter a number in radians to find the sine");
+        }
+        else if (operator.toLowerCase().equals("cos")) {
+            System.out.println("Enter a number in radians to find the cosine");
+        }
+        else if (operator.toLowerCase().equals("tan")) {
+            System.out.println("Enter a number in radians to find the tangent");
+        }
     }
 
     public static double getScientificOperationResult(double operand, String operator) {
